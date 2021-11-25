@@ -1,0 +1,13 @@
+{
+  "name": "mapreduce",
+  "version": "1.0.0",
+  "module": "",
+  "description": "a sample nodeJs command line app",
+  "main": "bin/index.js",
+  "author": "Hardik Babaria",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "mapreduce": "./bin/index.js"
+  }
+}
