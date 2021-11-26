@@ -1,3 +1,4 @@
+const { encrypt } = require("../common/util/encryption");
 const httpRequest = require("./httpClient")
 
 /**
@@ -5,7 +6,7 @@ const httpRequest = require("./httpClient")
  * @param {*} numberArrays - an object containing arrays of numbers
  */
 const generateTotal = async (numberArrays) => {
-    const data = JSON.stringify(numberArrays)
+    const data = encrypt(numberArrays) //Encrypt the data before sending to server
     const params = {
         host: '127.0.0.1',
         port: 5000,
