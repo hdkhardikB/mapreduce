@@ -1,13 +1,16 @@
 const fs = require('fs')
 
 const convertLinesToArray = (lines) => {
-    let separator = ","
     let numberLines = {}
     for (let lineIndex = 0; lineIndex <= lines.length - 1; lineIndex++) {
-        const currentLine = lines[lineIndex]
+        const currentLine = lines[lineIndex].trim()
         if (currentLine.length > 0) {
-            separator = currentLine.indexOf(separator) > -1 && `,` || ` `
-            numberLines[lineIndex] = currentLine.split(separator)
+            numberLines[lineIndex] = currentLine.split(/[ ,]+/).map(number => number.trim())
+        } else {
+            numberLines[lineIndex] = [0]
+        }
+        if(numberLines[lineIndex].filter(num=>isNaN(num)).length>0){
+            throw new Error("File is not valid")
         }
     }
     return numberLines
@@ -19,7 +22,7 @@ const readFileConent = async (path) => {
             if (err) {
                 reject(err);
             }
-            resolve(convertLinesToArray(data.toString().split(`\n`)));
+            resolve(convertLinesToArray(data.toString().replace(/\r\n/g,'\n').split('\n')));
         });
     });
 }

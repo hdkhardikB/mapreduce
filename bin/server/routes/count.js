@@ -1,3 +1,4 @@
+const { decrypt } = require("../../common/util/encryption");
 const makeTotal = require("../services/makeTotal");
 
 module.exports = async (req, res) => {
@@ -13,7 +14,7 @@ module.exports = async (req, res) => {
         }
 
         const data = Buffer.concat(buffers).toString(); // Convert chunks to string data
-        const jsonData = JSON.parse(data) // Convert string to json
+        const jsonData = decrypt(data) // Decrypt encoded data
         const resultSum = await makeTotal(jsonData)
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.write(JSON.stringify(resultSum));

@@ -1,5 +1,5 @@
 const generateTotal = require("./generateTotal")
-const readFileConent = require("./utils")
+const readFileConent = require("./file-utility")
 
 module.exports = (filePath) => {
     (async () => {
